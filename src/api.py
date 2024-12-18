@@ -8,6 +8,10 @@ from .repo import Repo
 def create_webhook_blueprint(argocd_client: ArgoCDClient):
     webhook_bp = Blueprint('webhook', __name__)
 
+    @webhook_bp.route('/whoami', methods=['GET'])
+    def whoami():
+        return argocd_client.user_info(), 200
+
     @webhook_bp.route('/webhook', methods=['POST'])
     def webhook():
         # misc
