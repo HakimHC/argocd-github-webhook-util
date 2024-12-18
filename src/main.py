@@ -1,7 +1,9 @@
+import os
 import sys
-from argocd import ArgoCDClient, ArgoClientFactory
-from api import create_flask_app
+from .argocd import ArgoCDClient, ArgoClientFactory
+from .api import create_flask_app
 
+app = create_flask_app(__name__)
 
 if __name__ == '__main__':
     try:
@@ -13,5 +15,4 @@ if __name__ == '__main__':
         )
         sys.exit(1)
 
-    app = create_flask_app(__name__)
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True if "true" == os.getenv('FLASK_DEBUG', 'true').lower() else False)
