@@ -1,6 +1,6 @@
 import sys
 from argocd import ArgoCDClient, ArgoClientFactory
-from webhook_proxy import create_flask_app
+from api import create_flask_app
 
 
 if __name__ == '__main__':

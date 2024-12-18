@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 
 def get_files_in_directory(directory: Path):

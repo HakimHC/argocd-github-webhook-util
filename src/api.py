@@ -2,8 +2,7 @@ from flask import Blueprint, request, Flask
 from pathlib import Path
 from utils import get_affected_argocd_applications, get_changed_files
 from argocd import ArgoCDClient, ArgoClientFactory
-from repo_handler import Repo
-import os
+from repo import Repo
 
 
 def create_webhook_blueprint(argocd_client: ArgoCDClient):
