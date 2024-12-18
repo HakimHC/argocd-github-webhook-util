@@ -21,18 +21,18 @@ class Repo:
 
     def __get_repo_name(self) -> str | None:
         # TODO: implement parsing for https scheme
-        if re.match(r'^git@.*:.*\.git$', self.url):
+        if re.match(r'^git@.+:.+\.git$', self.url):
             return self.__parse_repo_name_ssh()
-        if re.match(r'^https?://.*/.*/.*\.git$', self.url):
+        if re.match(r'^https?://.+/.+/.+\.git$', self.url):
             return self.__parse_repo_name_https()
         return None
         # raise NotImplementedError()
 
     def __parse_repo_name_ssh(self):
-        return re.findall(r'^git@.*:(.*)\.git$', self.url)[0]
+        return re.findall(r'^git@.+:(.+)\.git$', self.url)[0]
 
     def __parse_repo_name_https(self):
-        return re.findall(r'^https?://.*/(.*/.*).git$', self.url)[0]
+        return re.findall(r'^https?://.+/(.+/.+).git$', self.url)[0]
 
     class GitCloneError(Exception):
         def __init__(self, message: str):
