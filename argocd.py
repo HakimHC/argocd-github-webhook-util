@@ -31,11 +31,26 @@ class ArgoCDClient:
         items = response.get('items', [])
         return [item['metadata']['name'] for item in items]
 
+    def refresh_application(self, application: str) -> None:
+        applications = self.list_applications()
+        if application not in applications:
+            raise ArgoCDClient.NonExistentApplicationError(f'Application "{application}" does not exist.')
+        response = self.__get(
+            endpoint=f'/api/v1/applications/{application}',
+            params={'refresh': 'true'}
+        )
+        error = response.get('error')
+        if error:
+            raise ArgoCDClient.SyncError(error)
+
     def sync_application(self, application: str) -> None:
         applications = self.list_applications()
         if application not in applications:
             raise ArgoCDClient.NonExistentApplicationError(f'Application "{application}" does not exist.')
-        response = self.__post(f'/api/v1/applications/{application}/sync')
+        response = self.__post(
+            endpoint=f'/api/v1/applications/{application}/sync',
+            json={'name': application}
+        )
         error = response.get('error')
         if error:
             raise ArgoCDClient.SyncError(error)

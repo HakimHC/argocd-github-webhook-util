@@ -12,3 +12,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     print(argocd_client.list_applications())
+    argocd_client.refresh_application(
+        application='prometheus'
+    )
