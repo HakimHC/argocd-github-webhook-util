@@ -1,7 +1,7 @@
 import os
 import sys
-from .argocd import ArgoCDClient, ArgoClientFactory
-from .api import create_flask_app
+from src.argocd import ArgoCDClient, ArgoClientFactory
+from src.api import create_flask_app
 
 app = create_flask_app(__name__)
 
