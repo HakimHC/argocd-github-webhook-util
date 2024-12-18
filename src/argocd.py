@@ -33,8 +33,13 @@ class ArgoCDClient:
         self.__argocd_api_url = os.getenv('ARGOCD_API_URL', "")
         if not self.__argocd_api_url:
             raise ArgoCDClient.EmptyApiUrlError('The ArgoCD API URL was not set.')
+        self._token = os.getenv('ARGOCD_API_TOKEN') or self.__get_token()
 
-        self._token = self.__get_token()
+    def user_info(self):
+        response = self.__get('/api/v1/session/userinfo')
+        if response.get('error'):
+            return {}
+        return response.get('username')
 
     def list_applications(self) -> list[str]:
         response = self.__get('/api/v1/applications')
