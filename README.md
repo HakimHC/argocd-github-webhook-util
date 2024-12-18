@@ -1,7 +1,7 @@
 # ArgoCD GitHub WebHook utility for monorepos with multiple Applications
 
 ### NOTE!!!
-#### This is not meant to be used for production, this is only a personal weekend-project to learn about developing applications on Kubernetes, and interacting with the k8s API.
+#### This is not meant to be used for production, this is only a personal weekend-project to learn about developing applications on Kubernetes, and interacting with the k8s API. Also, it's the first time I add unit tests to my CI.
 #### If you want a similar functionality, you should take a look into the "argocd.argoproj.io/manifest-generate-paths" annotation (https://argo-cd.readthedocs.io/en/release-2.5/operator-manual/high_availability/)
 
 
