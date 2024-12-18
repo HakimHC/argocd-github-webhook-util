@@ -1,2 +1,5 @@
+from argocd import ArgoCD
+
+
 if __name__ == '__main__':
-    pass
+    argocd_api = ArgoCD()
