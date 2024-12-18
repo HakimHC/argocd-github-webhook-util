@@ -14,6 +14,16 @@ def auth_header(func):
     return wrapper
 
 
+class ArgoClientFactory:
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if not ArgoClientFactory.__instance:
+            return ArgoCDClient()
+        return ArgoClientFactory.__instance
+
+
 class ArgoCDClient:
     def __init__(self):
         self.__username = os.getenv('ARGOCD_USERNAME', "")
