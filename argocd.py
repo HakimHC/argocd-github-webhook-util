@@ -26,9 +26,19 @@ class ArgoCDClient:
 
         self._token = self.__get_token()
 
-    def list_accounts(self):
-        response = self.__get('/api/v1/account')
-        return response.get('items', [])
+    def list_applications(self) -> list[str]:
+        response = self.__get('/api/v1/applications')
+        items = response.get('items', [])
+        return [item['metadata']['name'] for item in items]
+
+    def sync_application(self, application: str) -> None:
+        applications = self.list_applications()
+        if application not in applications:
+            raise ArgoCDClient.NonExistentApplicationError(f'Application "{application}" does not exist.')
+        response = self.__post(f'/api/v1/applications/{application}/sync')
+        error = response.get('error')
+        if error:
+            raise ArgoCDClient.SyncError(error)
 
     def __get_token(self) -> str:
         """
@@ -71,5 +81,13 @@ class ArgoCDClient:
             super().__init__(message)
 
     class EmptyApiUrlError(Exception):
+        def __init__(self, message):
+            super().__init__(message)
+
+    class NonExistentApplicationError(Exception):
+        def __init__(self, message):
+            super().__init__(message)
+
+    class SyncError(Exception):
         def __init__(self, message):
             super().__init__(message)
