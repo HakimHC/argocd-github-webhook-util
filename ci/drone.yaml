@@ -16,6 +16,10 @@ platform:
 #  event:
 #    - push
 
+trigger:
+  branch:
+    - main
+
 steps:
   - name: test
     image: python:3.11-slim
