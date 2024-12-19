@@ -26,7 +26,7 @@ steps:
     commands:
       - 'echo -e "\033[1;31mThis is red text\033[0m"'
   - name: test
-    image: python:3.11-slim
+    image: python:3.11
     commands:
       - pip install --upgrade pip
       - pip install --no-cache-dir pytest==8.3.4
