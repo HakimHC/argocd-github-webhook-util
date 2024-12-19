@@ -16,7 +16,6 @@ platform:
 #  event:
 #    - push
 
-
 trigger:
   branch:
     - main
