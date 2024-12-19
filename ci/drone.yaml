@@ -3,6 +3,19 @@ kind: pipeline
 type: kubernetes
 name: ci
 
+metadata:
+  namespace: drone
+
+platform:
+  os: linux
+  arch: arm64
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+
 steps:
   - name: test
     image: python3.11-slim
