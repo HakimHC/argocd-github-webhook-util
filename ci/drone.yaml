@@ -20,10 +20,18 @@ trigger:
   branch:
     - main
 
+workspace:
+  path: /drone/src
+
 steps:
-  - name: test
+  - name: Install dependencies
     image: python:3.11-slim
     commands:
       - pip install --upgrade pip
-      - pip install --no-cache-dir pytest==8.3.4
+      - pip install -r requirements.txt
+
+  - name: Lint & Test
+    image: python:3.11-slim
+    commands:
+      - flake8 --statistics
       - pytest -vs --color=yes tests
