@@ -24,6 +24,11 @@ workspace:
   path: /drone/src
 
 steps:
+  - name: Debug environment variables
+    image: alpine:latest
+    commands:
+      - env
+
   - name: Install dependencies
     image: python:3.11-slim
     commands:
