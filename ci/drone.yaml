@@ -21,13 +21,9 @@ trigger:
     - main
 
 steps:
-  - name: test-colors
-    image: alpine
-    commands:
-      - 'echo -e "\033[1;31mThis is red text\033[0m"'
   - name: test
-    image: python:3.11
+    image: python:3.11-slim
     commands:
       - pip install --upgrade pip
-      - pip install --no-cache-dir pytest
-      - pytest -vs tests
+      - pip install --no-cache-dir pytest==8.3.4
+      - pytest -vs --color=true tests
