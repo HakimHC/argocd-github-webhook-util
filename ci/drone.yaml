@@ -22,7 +22,7 @@ trigger:
 
 steps:
   - name: test-colors
-    alpine: ubuntu
+    image: alpine
     commands:
       - 'echo -e "\033[1;31mThis is red text\033[0m"'
   - name: test
