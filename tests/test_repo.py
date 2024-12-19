@@ -1,6 +1,8 @@
-from src.repo import Repo
+from __future__ import annotations
+
 import pytest
-import random
+
+from src.repo import Repo
 
 
 @pytest.mark.parametrize(
@@ -13,8 +15,8 @@ import random
         ("http://git.example.com/owner/repo.git", "owner/repo"),
         ("git@git.example.com:owner/repo.git", "owner/repo"),
         ("git@github.com:HakimHC/fail", None),
-        ("https://bit.bucket.com///.git", None)
-    ]
+        ("https://bit.bucket.com///.git", None),
+    ],
 )
 def test_repo_name(repo, expected):
     repository = Repo(repo)

@@ -1,9 +1,13 @@
-import pytest
-from pathlib import Path
-import shutil
-from src.utils import get_files_in_directory
-import random
+from __future__ import annotations
+
 import os
+import random
+import shutil
+from pathlib import Path
+
+import pytest
+
+from src.utils import get_files_in_directory
 
 
 def generate_files_in_directory(directory: Path, files: list[str]) -> None:
@@ -12,12 +16,7 @@ def generate_files_in_directory(directory: Path, files: list[str]) -> None:
 
 
 @pytest.mark.parametrize(
-    "files",
-    [
-        ["a", "b", "c"],
-        ["file1", "file2", ".hidden", ".gitignore"],
-        []
-    ]
+    "files", [["a", "b", "c"], ["file1", "file2", ".hidden", ".gitignore"], []]
 )
 def test_get_files_in_directory(files: list[str]):
     directory = Path("/tmp/%032x" % random.getrandbits(128))
@@ -29,4 +28,3 @@ def test_get_files_in_directory(files: list[str]):
         raise
     finally:
         shutil.rmtree(directory)
-
