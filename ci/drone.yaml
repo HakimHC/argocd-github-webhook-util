@@ -10,11 +10,11 @@ platform:
   os: linux
   arch: arm64
 
-trigger:
-  branch:
-    - main
-  event:
-    - push
+#trigger:
+#  branch:
+#    - master
+#  event:
+#    - push
 
 steps:
   - name: test
